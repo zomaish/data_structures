@@ -1,0 +1,45 @@
+1. JAVA is Object-Oriented while C is procedural. Different Paradigms, that is.
+
+Most differences between the features of the two languages arise due to the use of different programming paradigms.
+C breaks down to functions while JAVA breaks down to Objects. C is more procedure-oriented while JAVA is data-oriented.
+
+2. Java is an Interpreted language while C is a compiled language.
+We all know what a compiler does. It takes your code & translates it into something the machine can understand-that is to
+say-0’s & 1’s-the machine-level code. That’s exactly what happens with our C code-it gets ‘compiled’. While with JAVA,
+the code is first transformed to what is called the bytecode. This bytecode is then executed by the JVM(Java Virtual Machine).
+For the same reason, JAVA code is more portable.
+
+3. C is a low-level language while JAVA is a high-level language.
+C is a low-level language(difficult interpretation for the user, closer significance to the machine-level code)
+while JAVA is a high-level lagunage(abstracted from the machine-level details, closer significance to the program itself).
+
+
+5. Pointer go backstage in JAVA while C requires explicit handling of pointers.
+When it comes to JAVA, we don’t need the *’s & &’s to deal with pointers & their addressing.
+More formally, there is no pointer syntax required in JAVA. It does what it needs to do.
+While in JAVA, we do create references for objects.
+
+6. The Behind-the-scenes Memory Management with JAVA & The User-Based Memory Management in C.
+Remember ‘malloc’ & ‘free’? Those are the library calls used in C to allocate & free chunks of memory for specific
+data(specified using the keyword ‘sizeof’). Hence in C, the memory is managed by the user while JAVA uses a garbage collector
+that deletes the objects that no longer have any references to them.
+
+7. JAVA supports Method Overloading while C does not support overloading at all.
+JAVA supports function or method overloading-that is we can have two or more functions with the same
+name(with certain varying parameters like return types to allow the machine to differentiate between them).
+That it to say, we can overload methods with the same name having different method signatures. JAVA(unlike C++),
+does not support Operator Overloading while C does not allow overloading at all.
+
+8. Unlike C, JAVA does not support Preprocessors, & does not really them.
+The preprocessor directives like #include & #define, etc are considered one of the most essential elements of C programming.
+However, there are no preprocessors in JAVA. JAVA uses other alternatives for the preprocessors.
+For instance, public static final is used instead of the #define preprocessor.
+Java maps class names to a directory and file structure instead of the #include used to include files in C.
+
+9. The standard Input & Output Functions.
+Although this difference might not hold any conceptual(intuitive) significance, but it’s maybe just the tradition.
+C uses the printf & scanf functions as its standard input & output while JAVA uses the System.out.print & System.in.read functions.
+
+10. Exception Handling in JAVA And the errors & crashes in C.
+When an error occurs in a Java program it results in an exception being thrown.
+It can then be handled using various exception handling techniques. While in C, if there’s an error, there IS an error.

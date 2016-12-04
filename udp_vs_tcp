@@ -1,0 +1,20 @@
+http://www.diffen.com/difference/TCP_vs_UDP
+
+Both protocols have Source port, Destination port, Check Sum
+
+TCP:                                                    UDP:
+1- Connection oriented                                  connectionless
+2- Deliver messages                                     Deliver messages
+3- HTTP, HTTPs, FTP, SMTP, Telnet	                      DNS, DHCP, TFTP, SNMP, RIP, VOIP
+4- TCP rearranges data packets in the                   UDP has no inherent order as all packets are independent of each other.
+order specified.	                                      If ordering is required, it has to be managed by the application layer.
+5- Slower                                               faster
+6- Reliable                                             No guarantee
+7- Streamed                                             packets sent individually
+8- TCP header size is 20 bytes	                        UDP Header size is 8 bytes.
+9- TCP is heavy-weight. TCP requires three              No h  andshake
+packets to set up a socket connection
+10- TCP does error checking and error recovery.         UDP does error checking but simply discards erroneous packets.
+Erroneous packets are retransmitted from the source     Error recovery is not attempted.
+to the destination.
+11- Acknowledgement segments	                          No Acknowledgment

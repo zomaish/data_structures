@@ -1,0 +1,26 @@
+SQL has long been the standard. Using it gives you access to the whole collection of platforms that were built to work with relational databases. These platforms will always work better out of the box with your standard SQL management tool. It does a couple things especially well. The alternative, NoSQL, has its own set of characteristics.
+Here’s a breakdown of the most important features in database management, and how each answers the problem.
+Queries: SQL supports a growing subset languages for queries, as well as a wide range of filters, sorting options,
+and projections and index queries. NoSQL does all this as well, but SQL can often go beyond it,
+allowing powerful aggregations of your data as well, beyond what NoSQL can do.
+
+Transactions: Transactions are important because they ensure that you have atomically made changes to your database.
+Many NoSQL platforms don’t support transactions, so be aware of this feature when you’re figuring out which to use,
+and what your own needs are.
+
+Consistency: MySQL platforms often use a single master to guarantee strong consistency in your database.
+These use synchronous replication to ensure you don’t lose important changes queued up to the master.
+NoSQL, by contrast, does replication of entity groups without a master, so that data is strong within an entity group,
+and is eventually updated across all groups. The better option depends on the constraints and needs of your database.
+
+Scalability: For years, database administrators relied on scaling up, buying bigger servers as database load increased.
+However, as transaction rates and demands on the databases continue to expand immensely, emphasis is on scaling out instead.
+Scaling out is distributing databases across multiple hosts, and that’s something NoSQL does better than standard SQL.
+They’re designed for optimal use on scaled out databases.
+
+Management: NoSQL databases are generally designed to require less management overall.
+Repairs are often automatic, and data distribution and simpler data models contribute to less administration required overall.
+However, you’ve also got less support when there’s a problem. SQL platforms often have vendors waiting to supply support to enterprises.
+
+Schema: Regular SQL platforms often have strictly enforced rules for a schema change, to stave off user-created typos that
+can put faults in your query. NoSQL platforms will have their own mechanisms for combating this.

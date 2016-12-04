@@ -1,0 +1,1 @@
+//count of subarrays = n*((n+1)/2)

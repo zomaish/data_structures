@@ -1,0 +1,20 @@
+Similar to cedexis
+
+Amazon Route 53 (Route 53) is a scalable and highly available Domain Name System (DNS).
+It is part of Amazon.com's cloud computing platform,
+Amazon Web Services (AWS). The name is a reference to TCP or UDP port 53,
+where DNS server requests are addressed.
+In addition to being able to route users to various AWS services, including EC2 instances,
+Route 53 also enables AWS customers to route users to non-AWS infrastructure.
+
+Route 53's servers are distributed throughout the world.
+Amazon Route 53 supports full, end-to-end DNS resolution over IPv6.
+Recursive DNS resolvers on IPv6 networks can use either IPv4 or IPv6 transport to send DNS queries to Amazon Route 53.
+
+
+Route 53 started out as an authoritative DNS service for AWS users. They have more recently started introducing features
+that allow you to push your traffic between different AWS regions. Today, we want to take a look at how that product stacks up.
+
+Route 53 allows users to set up conditional routing trees that establish rules for when to fail over to your various other
+cloud instances in different regions.  These conditional routing trees are dependent on some form of health check that you establish,
+as well. Sound like a lot of work? It is.

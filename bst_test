@@ -1,0 +1,55 @@
+class Node {
+  constructor(data) {
+    if (typeof data !== "number") {
+      throw Error("invalid data type");
+    }
+    this.data = data;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+class BST {
+  constructor() {
+    this.root = null;
+  }
+  
+  insert(node, n) {
+    if (!node) {
+      node = new Node(n);
+      return node;
+    }
+    
+    if (node.data >= n) node.left = this.insert(node.left, n);
+    else if (node.data < n) node.right = this.insert(node.right, n);
+    
+    return node;
+  }
+
+  search(node, target) {
+    if (!node || node.data === target) return node;
+    
+    console.log(node.data, target)
+
+    if (node.data > target) this.search(node.left, target);
+    
+    this.search(node.right, target);
+  }
+}
+
+const bst = new BST();
+
+
+const n1 = new Node(20);
+n1.left = new Node(10);
+n1.right = new Node(21);
+n1.left.left = new Node(5)
+n1.left.right = new Node(17);
+n1.left.left.left = new Node(2);
+n1.left.left.right = new Node(8);
+n1.left.right.left = new Node(16);
+n1.left.right.right = new Node(18);
+
+bst.root = n1;
+console.log(bst.root)
+console.log(bst.search(bst.root, 10))

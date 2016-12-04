@@ -1,0 +1,10 @@
+Breadth First
+  Level Order
+
+Depth First
+  Pre-Order
+  In-Order
+  Post-Order
+
+
+you can convert two arrays to a bst only if one of the arrays is an in-order traversal
