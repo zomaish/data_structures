@@ -28,7 +28,6 @@ const getMinDiceThrows = (board, n) => {
   }
 
   return qeSrc.moves;
-
 }
 
 

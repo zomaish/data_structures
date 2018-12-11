@@ -2,6 +2,8 @@
 
 //a graph is a cycle if g[u][u] = 1
 
+//there are max N(N-1) Edeges in directed graph and N(N-1)/2 in undirected graph
+
 class Node {
   constructor(src, dest) {
     this.src = src;

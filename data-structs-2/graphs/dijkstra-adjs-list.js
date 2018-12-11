@@ -1,6 +1,8 @@
 //should redo with lists instead of a matrix
 
 //also solve https://www.geeksforgeeks.org/minimum-edges-reverse-make-path-source-destination/
+
+//Time complexity = O(VlogV + E) using fib heap
 class GraphNode {
   constructor(v, w) {
     this.v = v|0;
@@ -17,8 +19,8 @@ class Graph {
       this.adj[i] = [];
   }
 
-  addEdge(v, u, w) {
-    this.adj[v].push(new GraphNode(u, w));
+  addEdge(u, v, w) {
+    this.adj[u].push(new GraphNode(v, w));
   }
 }
 
@@ -74,7 +76,7 @@ class MinHeap {
 
     while(i > 0 && this.arr[i].v < this.arr[parent(i)].v) {
       this.swap(i, parent(i));
-      i = parent(1)
+      i = parent(i)
     }
   }
 
@@ -116,7 +118,7 @@ const djikstraSP = (g, src, V) => {
     const u = minHeap.extractMin().v;
 
     const list = g.adj[u];
-    let i =0;
+    let i=0;
 
     while(i<list.length) {
       const n = list[i].v;
@@ -129,6 +131,8 @@ const djikstraSP = (g, src, V) => {
 
         minHeap.decreaseKey(n, dist[n])
       }
+
+      ++i;
     }
   }
 

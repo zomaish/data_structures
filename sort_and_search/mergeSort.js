@@ -21,19 +21,19 @@ function _mergeSort(arr, temp, l, r) {
     _mergeSort(arr, temp, l, m);
     _mergeSort(arr, temp, m+1, r);
 
-    return merge(arr, temp, l, m+1, r);
+    return merge(arr, temp, l, m, r);
   }
 }
 
 function merge(arr, temp, l, m, r) {
-   let i=l, j=m, k=l;
+   let i=l, j=m+1, k=l;
   
    console.log(l, m, r)
-   while(i<=(m-1) && j<=r) {
+   while(i<=m && j<=r) {
      temp[k++] = arr[i] <= arr[j] ? arr[i++] : arr[j++];
    }
 
-   while(i<= (m-1)) {
+   while(i<= m) {
      temp[k++] = arr[i++];
    }
 

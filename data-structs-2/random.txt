@@ -1,0 +1,12 @@
+
+//Click on a link in the browser
+At a high level, when you click on a link, your browser and operating system figure out where you've clicked.
+The web page that you're viewing has hidden information associated with whatever you clicked on.
+That's called a Uniform resource locator (URL).  That indicates the next web page that you want to view.
+Embedded inside of the URL is the name of the web site that holds the page that you've asked for.
+Your browser takes that URL, breaks out the name of the web site, and then uses the Domain Name System (DNS)
+to get an Internet Protocol (IP) address for the site.
+
+Your browser then opens a Transmission Control Protocol (TCP) connection to the web site over IP.
+It asks to speak to the Hypertext Transfer Protocol (HTTP) server (or, for secure connections, HTTPS)
+which then provides the next web page in HyperText Markup Language (HTML) that your browser renders.

@@ -1,0 +1,20 @@
+Often figuring out how to combine solutions helps lead to correct subproblem definitions. There
+are a few major ways to combine solutions
+Prefix/Suffix - Start with solving smaller subproblems from beginning (or end) and expand
+subproblems towards the end (or the beginning). Examples: Assembly line, Crazy 8’s, Piano
+fingering
+
+Substring - Start with solving smaller subproblems substrings and expand outwards. We need
+to use this in problems where we can’t take advantage of prefix/suffix structures. Examples: Multiplication
+parentheses, Two person coin game (Consider a row of n coins of values v(1) ... v(n),
+where n is even. We play a game against an opponent by alternating turns. In each turn, a player
+selects either the first or last coin from the row, removes it from the row permanently, and receives
+the value of the coin. Determine the maximum possible amount of money we can definitely win if
+we move first.)
+
+Combination - If you’re storing solutions in some multi-dimensional table, you often combine
+solutions from other cells. The order may be a combination of prefix/suffix/substring with each
+dimension of the table using a different structure. Examples: DNA alignment, Edit distance
+Tree - Start with solving smaller subproblems at the leaves and expand upwards, level by level,
+until you solve the the subproblem at the root. Examples: Phylogeny, Vertex cover in tree, railroad
+gauge
