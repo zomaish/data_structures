@@ -5,6 +5,8 @@ const permuteUniqueString = (str, l, r) => {
    * choose c
    * premute the rest
    * unchoose c
+   * 
+   *  O(n*n!) time complexity
    */
 
 

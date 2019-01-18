@@ -1,12 +1,54 @@
-const Graph = require("./shared/graph/GraphWeightedAdjList");
-class HeapNode {
-  constructor(src, w) {
-    this.src = src;
-    this.w = w;
+class MinHeap {
+  constructor(capacity) {
+    this.capacity = parseInt(capacity);
+    this.lastIndex = 0;
+    this.heap = new Array(this.size);
+  }
+
+  swap(a, b) {
+    const temp = this.heap[a];
+    this.heap[a] = this.heap[b];
+    this.heap[b] = temp;
+  }
+
+  add(v) {
+    if (this.lastIndex === this.size) throw new Error("Heap overflow");
+
+    this.heap[this.lastIndex] = v;
+    this.minHeapify(this.lastIndex);
+    this.lastIndex +=1;
+  }
+
+  minHeapify(i) {
+    let parent = i;
+    const left = 2*parent + 1;
+    const right = 2*parent + 2;
+
+    if (left < this.size && this.heap[parent] > this.heap[left]) parent = left;
+    if (right < this.size && this.heap[parent] > this.heap[right]) parent = right;
+
+    if (parent != i) {
+      this.swap(parent, i)
+
+      console.log('after swapping' , parent, i, [...this.heap])
+      this.minHeapify(parent);
+    }
+  }
+
+  decreaseKey(i) {}
+  deleteKey() {}
+  extractMin() {
+    const temp = this.heap[0];
+    this.heap[0] = Number.MAX_VALUE;
+    this.minHeapify(0);
+    this.heap[this.lastIndex] = undefined;
+    this.lastIndex -=1;
+    return temp
   }
 }
 
-class MinHeap {
+/**
+ * class MinHeap {
   constructor(capacity) {
     this.capacity = parseInt(capacity);
     this.lastIndex = 0;
@@ -91,57 +133,4 @@ class MinHeap {
     return temp
   }
 }
-
-const djikstraSP = (graph, src, V) => {
-  const path = Array.apply(null, Array(V)).map(Number.prototype.valueOf, Number.MAX_VALUE);
-  path[src] = 0;
-
-  const minHeap = new MinHeap(V);
-
-  for (let i=0; i<V; i++) 
-    minHeap.add(new HeapNode(i, Number.MAX_VALUE));
-
-  minHeap.decreaseKey(src, 0)
-
-  
-  while(!minHeap.empty()) {
-    const u = minHeap.extractMin().src;
-    console.log('u is', u)
-
-    let v = graph.adj[u].head;
-
-    while(v) {
-
-      if (path[v.v] > (path[u] + v.w) && path[u] != Number.MAX_VALUE && minHeap.find(v.v) !== undefined) {
-        path[v.v] = path[u] + v.w
-        minHeap.decreaseKey(v.v, path[v.v]);
-      }
-
-      v = v.next
-    }
-  }
-  console.log(path)
-};
-
-
-
-
-const V = 9; 
-const graph = new Graph(V); 
-//make graph undirected in original class
-graph.addEdge(0, 1, 4); 
-graph.addEdge(0, 7, 8); 
-graph.addEdge(1, 2, 8); 
-graph.addEdge(1, 7, 11); 
-graph.addEdge(2, 3, 7); 
-graph.addEdge(2, 8, 2); 
-graph.addEdge(2, 5, 4); 
-graph.addEdge(3, 4, 9); 
-graph.addEdge(3, 5, 14); 
-graph.addEdge(4, 5, 10); 
-graph.addEdge(5, 6, 2); 
-graph.addEdge(6, 7, 1); 
-graph.addEdge(6, 8, 6); 
-graph.addEdge(7, 8, 7);
-// console.log(JSON.stringify(graph.adj));
-djikstraSP(graph, 0, V); 
+ */

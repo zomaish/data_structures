@@ -62,4 +62,4 @@ const printAllSubsetsBTUtil = (arr, res, subset, i) => {
 
 const set = ['a', 'b', 'c']
 
-printAllSubsetsBit(set)
+printAllSubsetsBT(set)

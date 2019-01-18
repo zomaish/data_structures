@@ -15,7 +15,7 @@ const dictionary = {
   mango: { v: 'mango', u: 0}
 };
 
-const breakWordUtil = (str, n, res, f) => {
+const breakWordUtil = (str, n, res) => {
   // console.log('str', str, 'n', n, 'res', res)
   let tres = res;
   for (let e=1; e<=n; e++) {
@@ -42,7 +42,7 @@ const breakWord = (str) => {
   const n = str.length;
   const res = [];
 
-  breakWordUtil(str, n, '', false)
+  breakWordUtil(str, n, '')
           
 
 }

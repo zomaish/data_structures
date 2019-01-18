@@ -1,10 +1,6 @@
 
 
-
-
-const removeUtil= (str, n, i) => {
-
-
+const removeUtil= (str, i, n) => {
   if (isValidStr(str)) {
     return true;
   }
@@ -24,11 +20,9 @@ const removeUtil= (str, n, i) => {
 
 const removeInvalidParenthesis = (str) => {
   const n = str.length;
-
   if (n < 2) return;
 
-  console.log(removeUtil(str, n, 0));
-
+  console.log(removeUtil(str, 0, n));
 };
 
 

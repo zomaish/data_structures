@@ -29,8 +29,9 @@ const isBipartite = (g, src) => {
     //cycle
     if (g[u][u] === 1) return false;
 
-    for (let j=0; j<g.length; j++) {
+    for (let v=0; v<g.length; v++) {
       if (g[u][v] === 1 && colorArr[v] === -1) {
+        console.log('colorArr', colorArr, colorArr[u]);
         colorArr[v] = 1-colorArr[u];
         q.push(v);
       } else if (g[u][v] === 1 && colorArr[u] === colorArr[v]) {

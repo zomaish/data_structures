@@ -14,7 +14,7 @@ const find = (parent, x) => {
 const union = (parent, src, dest, size) => {
   const ps = parent[src];
   const pd = parent[dest]
-  if (pd === pd) return;
+  if (pd === ps) return;
 
   if (size[ps] > size[pd]) {
     parent[dest] = parent[src];
@@ -39,8 +39,6 @@ const countIslands = (board) => {
   const len = board.length;
   const parent = Array.apply(null, Array(len)).map((e, i) => i);
   const size = Array.apply(null, Array(len)).map(Number.prototype.valueOf, 0);
-
-  const visited = Array.apply(null, Array(len)).map(() => Array.apply(null, Array(len).map(Boolean.prototype.valueOf, false)));
 
   for (let i=0; i<len; i++)
     for (let j=0; j<len; j++)

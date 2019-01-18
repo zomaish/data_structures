@@ -61,11 +61,27 @@ class Graph {
 
 
 
-const g1 = new Graph(5);
-g1.addEdge(1, 0); 
-g1.addEdge(0, 2); 
-g1.addEdge(2, 1); 
-g1.addEdge(0, 3); 
-g1.addEdge(3, 4);
+// const g1 = new Graph(5);
+// g1.addEdge(1, 0); 
+// g1.addEdge(0, 2); 
+// g1.addEdge(2, 1); 
+// g1.addEdge(0, 3); 
+// g1.addEdge(3, 4);
+
+// g1.addEdge(0, 1);
+// g1.addEdge(0,2);
+// g1.addEdge(1,2);
+// g1.addEdge(1,3)
+// g1.addEdge(2,3) 
+
+const g1 = new Graph(7);
+g1.addEdge(0, 1);
+g1.addEdge(0, 6);
+g1.addEdge(1,3);
+g1.addEdge(1,6);
+g1.addEdge(2,3);
+g1.addEdge(3,4);
+g1.addEdge(6,5);
+g1.addEdge(6, 0);
 
 g1.printScc();

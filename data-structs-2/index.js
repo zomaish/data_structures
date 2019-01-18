@@ -1,53 +1,41 @@
 
-//Time complexity is 2pow n
-
-const disks = {
-    'label' : 'src',
-    v: [40, 30, 20]
-};
 
 
-const towers = ['A', 'B', 'C'];
 
-const moveDisks = (disks) => {
 
-    const dest = {
-        'label' : 'dest',
-        v: []
-    };
-    const buf = {
-        'label' : 'buf',
-        v: []
-    };
+const calcUtil = (expr, l, r) => {
+  if (l>r) return 0;
 
-    moveDiskUtil(disks, dest, buf, disks.v.length)
+  let op = getNextOpIdx(expr, l, r);
+  let left = getLeftPos(expr, l, r);
+  let right = getRightPos(expr, l, r);
+  let res = 0;
+
+  switch(op) {
+    case "*":
+    case "/":
+      res += eval(`${expr.subString(l, left+1)} ${expr[op]} ${expr.subString(op+1, right+1)}`);
+    break;
+    case "+":
+      const t = op < 2 ? left : res;
+      res += eval(`${expr.subString(l, left+1)} + ${calcUtil(expr, right+1, r)}`)
+  }
+
+
+  return res + calcUtil(expr, right+1, r);
+
 }
 
 
-const moveDiskUtil = (src, dest, buf, n) => {
-    console.log('nnnnnnnnnnn ', n)
-    
-    if (n<=0) {
-        return;
-    }
+const calc = (expr) => {
 
-    moveDiskUtil(src, buf, dest, n-1);
 
-    const e = src.v.shift();
-    dest.v.unshift(e);
 
-    console.log('nnnnnnnnnnn after first rec ', n)
-    console.log('e', e, 'from', src.label, 'to', dest.label)
-    console.log('src', src)
-    console.log('dest', dest)
-    console.log('buf', buf)
-    console.log('-----------------------------------')
-    console.log('next is ', n-1)
-    console.log('')
-    console.log('')
+  res = calcUtil(expr, 0, expr.length-1);
 
-    moveDiskUtil(buf, dest, src, n-1);    
 }
 
 
-moveDisks(disks)
+
+
+console.log(calc('2*3+5/6*3+15'));

@@ -1,3 +1,5 @@
+//https://www.geeksforgeeks.org/number-of-triangles-in-a-undirected-graph/
+
 const countTriangles = (gr, isDirected) => {
   let trianglesCount = 0;
   const len = gr.length;
@@ -24,6 +26,14 @@ const countTriangles = (gr, isDirected) => {
 
 
 
+/**
+ * 
+ *      0 ------ 1 ------ 3
+ *        \      |      /
+ *          \    |    /
+ *            \  |  / 
+ *              \2/
+ */
 const graph = [
   [0, 1, 1, 0], 
   [1, 0, 1, 1], 
@@ -31,13 +41,13 @@ const graph = [
   [0, 1, 1, 0] 
 ]; 
 
-// Create adjacency matrix 
-// of a directed graph 
-const digraph = [
-  [0, 0, 1, 0], 
-  [1, 0, 0, 1], 
-  [0, 1, 0, 0], 
-  [0, 0, 1, 0] 
-]; 
+// // Create adjacency matrix 
+// // of a directed graph 
+// const digraph = [
+//   [0, 0, 1, 0], 
+//   [1, 0, 0, 1], 
+//   [0, 1, 0, 0], 
+//   [0, 0, 1, 0] 
+// ]; 
 
 console.log(countTriangles(digraph, true))

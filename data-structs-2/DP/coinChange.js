@@ -45,6 +45,6 @@ const coinChange = (coins, amt) => {
 	console.log(dp[amt])
 }
 
-const arr = [25, 10]
+const arr = [25, 10, 5, 1]
 
-//coinChange(arr, 50)
+coinChange(arr, 20)

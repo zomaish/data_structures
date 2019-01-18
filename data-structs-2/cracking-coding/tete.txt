@@ -1,0 +1,44 @@
+prefix is  a
+res is  [ 'a' ]
+prefix is  b
+prefix is  bl
+prefix is  ble
+res is  [ 'ble' ]
+prefix is  a
+res is  [ 'a' ]
+prefix is  l
+prefix is  le
+prefix is  ab
+prefix is  abl
+prefix is  able
+res is  [ 'a', 'able' ]
+prefix is  a
+res is  [ 'a' ]
+prefix is  o
+prefix is  ou
+prefix is  out
+prefix is  ab
+prefix is  abo
+prefix is  abou
+prefix is  about
+res is  [ 'a', 'about' ]
+prefix is  a
+res is  [ 'a' ]
+prefix is  c
+prefix is  co
+prefix is  cou
+prefix is  coun
+prefix is  count
+prefix is  ac
+prefix is  acc
+prefix is  acco
+prefix is  accou
+prefix is  accoun
+prefix is  account
+res is  [ 'a', 'account' ]
+prefix is  y
+prefix is  yo
+prefix is  you
+prefix is  youn
+prefix is  young
+res is  [ 'young' ]

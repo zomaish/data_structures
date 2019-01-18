@@ -8,15 +8,12 @@ const solveWordWrap = (words, m) => {
     const cost = Array.apply(null, Array(n)).map(Number.prototype.valueOf, Number.MAX_VALUE);
     const p = Array.apply(null, Array(n));
 
-
-
     for (let r=0; r<n; r++) {
         spaces[r][r] = m - words[r];
         for (let c=r+1; c<n; c++) {
             spaces[r][c] = spaces[r][c-1] - words[c] -1
         }
     }
-
 
     for (let r=0; r<n; r++) {
         for (let c=0; c<n; c++) {

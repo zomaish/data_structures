@@ -1,46 +1,42 @@
-
-
-const printMatrix = (ar) => {
-  console.log(JSON.stringify(ar));
-}
-
-const transpose = (ar, c, r) => {
-  //to replace the colume with the row, the value of row where we take the values will always equal
-  //the value of the colum they are moving to 
-  for (let i=0; i<r; i++) {
-  	for (let j = i; j<c; j++) {
-      let t = arr[i][j];
-      arr[i][j] = arr[j][i];
-      arr[j][i] = t;
+const transpose = (mtrx, n) => {
+  for (let r=0; r<n; r++) {
+    for (let c=r; c<n; c++) {
+      let t = mtrx[r][c];
+      mtrx[r][c] = mtrx[c][r];
+      mtrx[c][r] = t;
     }
   }
-  
-  return ar;
+}
+
+const flipColumns = (mtrx, n) => {
+  const mid = Math.ceil(n/2);
+
+  for (let c=0; c<n; c++) {
+    for (let r=0; r<mid; r++) {
+      const t = mtrx[r][c];
+      mtrx[r][c] = mtrx[n-1-r][c];
+      mtrx[n-1-r][c] = t;
+    }
+  }  
 };
 
-const reverseCol = (ar, c, r) => {
-  for (let i=0; i<c; i++) {
-   	for(let j=0, k=r-1; j<k; j++, k--) {
-      let t = ar[j][i];
-      ar[j][i] = ar[k][i];
-      ar[k][i] = t;
-    } 
-  }
-  return ar;
-  
+const rotate90 = (mtrx) => {
+  const n = mtrx.length;
+
+  transpose(mtrx, n);
+  console.log('trans', mtrx)
+  flipColumns(mtrx, n);
+  console.log('res', mtrx)
 };
 
-arr = [  
-  [ 1, 2, 3, 4 ],
-  [ 5, 6, 7, 8 ],
-  [ 9, 10, 11, 12 ],
-  [ 13, 14, 15, 16 ] 
+
+const mtrx = [  
+  [ 1, 2, 3, 4, 5 ],
+  [ 6, 7, 8, 9, 10 ],
+  [ 11, 12,  13, 14, 15 ],
+  [ 16, 17, 18, 19, 20 ],
+  [ 21, 22, 23, 24, 25]
 ];
 
-const rotate90 = (ar, c, r) => {
-  //transpose(ar, c, r)
-  return reverseCol(transpose(ar, c, r), c, r);
-  
-}
-printMatrix(rotate90(arr, 4, 4));
-// printMatrix(arr);
+
+rotate90(mtrx);

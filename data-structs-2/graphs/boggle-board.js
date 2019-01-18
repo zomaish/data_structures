@@ -17,15 +17,17 @@ const findWordsUtil = (board, visited, q, len, i, j, c) => {
   //console.log("i and j coming in ------- ", i, j)
   visited[i][j] = true;
   q.push(board[i][j]);
+
+  console.log(q)
   const word = q.join('');
 
-  console.log('word is ', word, ++c.c);
+  // console.log('word is ', word, ++c.c);
 
   if (dictionary[word]) console.log(word);
 
-  for (let k=i-1; k<=i+1 && k<len; k++) {
-    for (let m=j-1; m<=j+1 && m<len; m++) {
-      if(k>=0 && m >=0 && !visited[k][m]) {
+  for (let k=i-1; k<=i+1; k++) {
+    for (let m=j-1; m<=j+1; m++) {
+      if(k>=0 && m >=0 && m<len && k<len && !visited[k][m]) {
         findWordsUtil(board, visited, q, len, k, m, c);
       }
     }
