@@ -27,5 +27,6 @@ const findMaxArea = (hist) => {
 
 };
 
-const hist = [6,3,4,2,4,5,5,5,5,6,7,3];
+// const hist = [6,3,4,2,4,5,5,5,5,6,7,3];
+const hist = [1,8,6,2,5,4,8,3,7];
 console.log(findMaxArea(hist));

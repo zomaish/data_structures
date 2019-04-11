@@ -1,57 +1,58 @@
-const findBreakingIndex = (arr) => {
-  for(let i=1; i<arr.length; i++) {
-    if (arr[i] < arr[i-1]) return i;
-  }
+const arr = [1,2,4,7,10,11,7,7,7,10,10,10,11,11,16,18,19];
 
-  return -1;
+const INVALID_INDEX = -1;
+
+const findStartingDecrimentIndex = (arr) => {
+  for (let i=1; i<arr.length; i++) {
+    if (arr[i] < arr[i-1]) return i-1;
+  }
+  return i;
 }
 
-
-const findLeftIndex = (arr, l, r, brkngIdx) => {
-  if (l>r) return -1;
-  const e = arr[brkngIdx];
-
-  let m = (l+r)/2 | 0;
-  if (arr[m] <= e) {
-    return findLeftIndex(arr, m+1, r, brkngIdx)
-  } else {
-    if (m === 0) return 0;
-    if (arr[m-1] > e) return findLeftIndex(arr, l, m-1, brkngIdx);
-
-    return m;
+const findStartingIncrementingIndexAfterDec = (arr, left) => {
+  for (let i = arr.length-1; i>left; i--) {
+    if (arr[i] < arr[i-1] || arr[i] <arr[left]) return i;
   }
+  return arr.length
 }
 
+const getleftIdx = (arr, left, lIdx) => {
+  for (let i=left; i>=0; i--) {
+    if (arr[i] <= arr[lIdx]) return i;
+  }
 
-const findRightIndex = (arr, brkngIdx) => {
-  const lastIdx = arr.length-1
-  const idx = brkngIdx === 0 ? 0 : brkngIdx-1;
+  return 0;
+};
 
-  const e = arr[idx];
+const getRightIdx = (arr, right, rIdx) => {
+  for (let i=arr.length-1; i>=right; i--) {
+    if (arr[i]<arr[rIdx]) return i
+  }
 
+  return arr.length
+};
+
+const findSmallestRange = (arr) => {
+  const left = findStartingDecrimentIndex(arr, 0, arr.length-1);
+  if (left === arr.length) return INVALID_INDEX;
+
+  const right = findStartingIncrementingIndexAfterDec(arr, left, arr.length-1);
+
+
+  console.log('left', left, 'right', right)
+  let lIdx = left;
+  let rIdx = right;
   
-  for (let i=lastIdx; i>=1; i--) {
-    if (arr[i] < e) return i;
+  for (let i=left+1; i<right; i++) {
+    if (arr[i] >= arr[rIdx]) rIdx = i;
+    if (arr[i] < arr[lIdx]) lIdx = i;
   }
 
-  return -1
-};
+  console.log('lIdx', lIdx, 'rIdx', rIdx)
+  const l = getleftIdx(arr,left, lIdx)
+  const r = getRightIdx(arr, right, rIdx);
 
-const subSort = (arr) => {
-  if (arr.length === 1) return [];
+  return [l, r]
+}
 
-  const breakingIdx = findBreakingIndex(arr);
-
-  console.log(breakingIdx);
-  if (breakingIdx >= 0 && breakingIdx < arr.length) {
-    const leftIdx = findLeftIndex(arr, 0, breakingIdx, breakingIdx);
-    const rightIdx = findRightIndex(arr, breakingIdx);
-    return [leftIdx, rightIdx];
-  }
-
-  return [];
-};
-
-const arr = [1, 2, 4, 7, 10, 11, 7, 12, 6, 7, 16, 18, 19];
-
-console.log(subSort(arr));
+console.log(findSmallestRange(arr))

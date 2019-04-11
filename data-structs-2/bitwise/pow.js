@@ -1,13 +1,26 @@
+const pow = (base, e) => {
+  if (e === 0) return 1;
 
+  let res = pow(base, e >> 1);
 
-
-const pow = (num, e) => {
-
+  if (e & 1) {
+    return res*res*base;
+  } else {
+    return  res*res;
+  }
 }
 
 
 
-pow(9,3)
+const mypow = (base, e) => {
+  if (e<0) {
+    base = 1/base;
+    e = Math.abs(e)
+  }
+
+  return pow(base, e)
+}
+console.log(mypow(2, 4));
 
 
 

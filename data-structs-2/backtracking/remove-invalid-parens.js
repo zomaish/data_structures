@@ -1,88 +1,112 @@
+const removeInvalidParentheses = (s) => {
+  res = {};
+  let rmL = 0, rmR = 0;
+  for(let i = 0; i < s.length; i++) {
+      if(s.charAt(i) == '(') rmL++;
+      if(s.charAt(i) == ')') {
+          if(rmL != 0) rmL--;
+          else rmR++;
+      }
+  }
+  DFS(res, s, 0, rmL, rmR, 0, "");
+  return Object.keys(res);
+}
+
+const DFS = (res, s, i, rmL, rmR, open, sb) => {
+  if(i == s.length && rmL == 0 && rmR == 0 && open == 0) {
+      console.log('sb', sb)
+      res[sb] = true;
+      return;
+  }
+  if(i == s.length || rmL < 0 || rmR < 0 || open < 0) return;
+
+  const c = s[i];
+  const len = sb.length;
+
+  if(c == '(') {
+      DFS(res, s, i + 1, rmL - 1, rmR, open, sb);
+      DFS(res, s, i + 1, rmL, rmR, open + 1, sb + c); 
+
+  } else if(c == ')') {
+      DFS(res, s, i + 1, rmL, rmR - 1, open, sb);
+      DFS(res, s, i + 1, rmL, rmR, open - 1, sb + c);
+
+  } else {
+      DFS(res, s, i + 1, rmL, rmR, open, sb + c); 
+  }
+}
 
 
 
-// class Solution {
-
-//     constructor() {
-//         validExpressions = {};
-//         let minimumRemoved;
-//     }
+countExrtaOpen = (str) => {
+    let open = 0;
   
-//     reset() {
-//       this.validExpressions.clear();
-//       this.minimumRemoved = Integer.MAX_VALUE;
-//     }
+    for (let i=0; i<str.length; i++) {
+      if (str[i] === '(') open +=1;
+      else if (str[i] === ')' && open >0) open -=1;
+    }
   
-//     recurse (
-//          s,
-//          index,
-//          leftCount,
-//          rightCount,
-//          expression,
-//          removedCount) {
+    return open;
+  }
   
-//       // If we have reached the end of string.
-//       if (index == s.length()) {
+  countExrtaclosed = (str) => {
+    let closed = 0;
+    let open = 0;
   
-//         // If the current expression is valid.
-//         if (leftCount == rightCount) {
+    for (let i=0; i<str.length; i++) {
+      if (str[i] === '(') open +=1;
+      else if (str[i] === ')') {
+        if (open > 0) open -= 1;
+        else closed +=1;
+      }
+    }
   
-//           // If the current count of removed parentheses is <= the current minimum count
-//           if (removedCount <= this.minimumRemoved) {
+    return closed;
+  }
   
-//             // Convert StringBuilder to a String. This is an expensive operation.
-//             // So we only perform this when needed.
-//             String possibleAnswer = expression.toString();
   
-//             // If the current count beats the overall minimum we have till now
-//             if (removedCount < this.minimumRemoved) {
-//               this.validExpressions.clear();
-//               this.minimumRemoved = removedCount;
-//             }
-//             this.validExpressions.add(possibleAnswer);
-//           }
-//         }
-//       } else {
   
-//         currentCharacter = s.charAt(index);
-//         let length = expression.length();
+  const removeUtil = (str, open, closed, idx) => {
+    if (open ===0 && closed ===0) {
   
-//         // If the current character is neither an opening bracket nor a closing one,
-//         // simply recurse further by adding it to the expression StringBuilder
-//         if (currentCharacter != '(' && currentCharacter != ')') {
-//           expression.append(currentCharacter);
-//           this.recurse(s, index + 1, leftCount, rightCount, expression, removedCount);
-//           expression.deleteCharAt(length);
-//         } else {
+      if (
+        countExrtaOpen(str) === 0 
+        && countExrtaclosed(str) === 0
+      )
+      console.log('found', str);
+      return;
+    }
   
-//           // Recursion where we delete the current character and move forward
-//           this.recurse(s, index + 1, leftCount, rightCount, expression, removedCount + 1);
-//           expression.append(currentCharacter);
+    if (open < 0 || closed < 0 || idx === str.length) {
+      return;
+    }
   
-//           // If it's an opening parenthesis, consider it and recurse
-//           if (currentCharacter == '(') {
-//             this.recurse(s, index + 1, leftCount + 1, rightCount, expression, removedCount);
-//           } else if (rightCount < leftCount) {
-//             // For a closing parenthesis, only recurse if right < left
-//             this.recurse(s, index + 1, leftCount, rightCount + 1, expression, removedCount);
-//           }
+    if (str[idx] === "(" && open>0) {
+      const left = str.substring(0, idx);
+      const right = str.substring(idx+1);
+      removeUtil(left+right, open-1, closed, idx)
+    }
   
-//           // Undoing the append operation for other recursions.
-//           expression.deleteCharAt(length);
-//         }
-//       }
-//     }
   
-//     public List<String> removeInvalidParentheses(String s) {
+    if (str[idx] === ")" && closed>0) {
+      const left = str.substring(0, idx);
+      const right = str.substring(idx+1);
+      removeUtil(left+right, open, closed-1, idx)
+    }
   
-//       this.reset();
-//       this.recurse(s, 0, 0, 0, new StringBuilder(), 0);
-//       return new ArrayList(this.validExpressions);
-//     }
-//   }
+    removeUtil(str, open, closed, idx+1);
+  }
+  
+  
+  const removeInvalidParentheses = (str) => {
+  
+    const open = countExrtaOpen(str);
+    const closed = countExrtaclosed(str);
+  
+    removeUtil(str, open, closed, 0)
+  };
+  
+  
 
 
-// const str = '()())()'
-// printParens(str, str.length, 0);
-
-
+console.log(removeInvalidParentheses('()())()'));

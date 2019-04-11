@@ -29,6 +29,38 @@ const longetsNonRepeatingSubString = (str) => {
 }
 
 
-const str = 'gezeksforgeeks';
+const str = 'geeksforgeeks';
 
 longetsNonRepeatingSubString(str)
+
+const longestNonRepeating = function(s) {
+  debugger;
+  const len = s.length;
+  if (len<2) return s.length;
+  
+  const cache = [];
+  const baseAscii = 'a'.charCodeAt();
+  let l=0, r=0;
+  let maxLen = 0;
+  while(r<len && l<len) {
+      let cAscii = s[r].charCodeAt() - baseAscii;
+
+      if (!cache[cAscii]) {
+          cache[cAscii] = 1;
+          r += 1;
+          maxLen = Math.max(maxLen, r-l);
+      } else {
+          let lAscii = s[l].charCodeAt() - baseAscii;
+          cache[lAscii] -= 1;
+          l += 1;
+      }
+  }
+
+  return maxLen;
+};
+
+// const str = "abcabcdea";
+// const str = 'geeksforgeeks'
+const str = 'bbbb'
+console.log(longestNonRepeating(str))
+

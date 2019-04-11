@@ -1,57 +1,75 @@
-class Sol {
-  patternMatchUtil(str, n, i, pat, m, j, map) { 
 
-    console.log('n', n, 'i', i, 'm', m, 'j', j);
-    
-    if (i == n && j == m) return true; 
-    if (i == n || j == m) return false; 
 
-    let ch = pat[j]; 
+const convertBsToAs = pat => pat.split("").map(c=> c==="a" ? "b" : "a").join("");
 
-    console.log(map, 'ch', ch, 'i', i, 'j', j)
-    if (map[ch]) {
-      let s = map[ch]; 
-      const len = s.length; 
+const isValidUtil = (str, pat, lenA, lenB) => {
+  let compStr = "";
+  let strPos = 0, patPos = 0;
+  let cache = {};
 
-      let subStr = str.substring(i, len); 
-      if (subStr === s) return false; 
+  while(patPos<pat.length && strPos<str.length) {
+    let p = pat[patPos++];
+    let charsLen = 0;
 
-      // if it matches, recurse for remaining characters 
-      return this.patternMatchUtil(str, n, i + len, pat, m, j + 1, map); 
+    if (p === "a") {
+      charsLen = lenA;
+    } else {
+      charsLen = lenB;
     }
 
-    for (let len = 1; len <= n - i; len++) {
-      map[ch] = str.substring(i, len); 
+    const strToAdd = str.substring(strPos, strPos+charsLen);
+    if (!cache[p]) {
+      cache[p] = strToAdd;
+    } else if (strToAdd !== cache[p]) {
+      return "";
+    }
 
-      if (this.patternMatchUtil(str, n, i + len, pat, m, j + 1, map)) return true; 
-
-      // if not, remove ch from the map 
-      map[ch] = undefined; 
-    } 
-
-    return false; 
-  } 
-
-  patternMatch(str, pat, n, m) { 
-    if (n < m) return false; 
+    compStr = compStr + strToAdd
+    strPos += charsLen;
+  }
 
 
-    // create an empty hashmap 
-    const map = {};
-    // store result in a boolean variable res 
-    const res = this.patternMatchUtil(str, n, 0, pat, m, 0, map); 
+  if (strPos < str.length || patPos < pat.length) {
+    return "";
+  }
 
-    // if solution exists, print the mappings 
-    console.log(map)
-    // return result 
-    return res; 
-  } 
-
+  return compStr;
 }
 
-const str = "GeeksforGeeks", pat = "GfG"; 
+const isValid = (str, pat) => {
+  
+  if (pat[0] === "b") {
+    pat = convertBsToAs(pat);
+  }
+  let ca = 0, cb=0;
 
-const n = str.length, m = pat.length; 
+  for (let i=0; i<pat.length; i++) {
+    if (pat[i] === "b") cb +=1;
+    else ca +=1;
+  }
 
-const x = new Sol();
-console.log(x.patternMatch(str, pat, n, m)) 
+  const strLen = str.length;
+  const maxAChars = parseInt((strLen-cb)/ca);
+  const maxBChars = parseInt((strLen-ca)/cb);
+
+  for (let lenA=1; lenA<=maxAChars; lenA++) {
+    for (let lenB=1; lenB<=maxBChars; lenB++) {
+      const compStr = isValidUtil(str, pat, lenA, lenB);
+      if (compStr === str) return true
+    }
+  }
+
+  return false;
+}
+
+
+let str = "bbbbbbaabbbaa";
+let pat = "bbaba";
+
+console.log(isValid(str, pat));
+
+str = "GeeksforGeeks";
+pat = "aba";
+
+
+console.log(isValid(str, pat));

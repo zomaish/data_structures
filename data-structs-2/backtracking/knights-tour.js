@@ -1,59 +1,81 @@
+//warnsdorffs-algorithm-knights-tour-problem
+
+
+// const moveCols = [1, 1, 2, 2, -1, -1, -2, -2]; 
+// const moveRows = [2, -2, 1, -1, 2, -2, 1, -1]; 
+
+const moveCols = [1, -1, 2, -2, 2, -2, 1, -1]; 
+const moveRows = [2, 2, 1, 1, -1, -1, -2, -2]; 
+
+
 const N = 8;
+const rand = () => Math.random() * 8;
 
-const isSafe = (x, y, res) => { 
-return ( x >= 0 && x < N && y >= 0 && y < N && res[x][y] == -1); 
+const isSafe = (r, c, visited) => {
+  return (c>=0 && c<N && r>=0 && r<N && visited[r][c] === -1)
+}
+const getDegree = (r, c, visited) => {
+  let count =0;
+
+  for (let i=0; i<N; i++) {
+    if (isSafe(r+moveRows[i], c+moveCols[i], visited)) count +=1;
+  }
+
+  return count;
+}
+
+const ktUtil = (r, c, visited, movs) => {
+
+  if (movs === N*N-1) return true;
+
+  let nR, nC, minDeg = N+1, idx = -1, temp;
+
+  for (let i=0; i<N; i++) {
+    nR = r + moveRows[i];
+    nC = c + moveCols[i];
+
+    if (isSafe(nR, nC, visited)
+      && (temp = getDegree(nR, nC, visited)) < minDeg) {
+        minDeg = temp;
+        idx = i
+      }
+  }
+
+  if (idx === -1) {
+
+    console.log('idx was -1', [...visited])
+    return false;
+  }
+
+  nR = r + moveRows[idx];
+  nC = c + moveCols[idx];
+
+  movs += 1;
+  visited[nR][nC] = movs;
+
+  if (ktUtil(nR, nC, visited, movs)) {
+    return true;
+  } else {
+    movs -= 1;
+    visited[nR][nC] = -1;
+  }
 } 
 
+const findClosedTour = () => {
 
-const solveKT = () =>{
-const res = Array.apply(null, Array(N))
-.map(
-  () => Array.apply(null, Array(N)).map(Number.prototype.valueOf, -1)
-);
+  const sR = parseInt(rand() % N);
+  const sC = parseInt(rand() % N);
 
+  visited = Array.apply(null, Array(N)).map( _ => Array(N).fill(-1));
 
-
-// Since the Knight is initially at the first block 
-res[0][0]  = 0; 
-
-/* Start from 0,0 and explore all tours using 
-solveKTUtil() */
-if (solveKTUtil(0, 0, 1, res) == false) {
-  console.log("Solution does not exist"); 
-  return false; 
-} 
-else
-  console.log(res); 
-
-return true; 
-} 
-
-/* A recursive utility function to solve Knight Tour 
-problem */
-const solveKTUtil = (x, y, count, res) => {
-  const movesMtrx = [
-    [2, 1], [1, 2], [-1, 2], [-2, 1],
-    [-2, -1], [-1, -2],  [1, -2], [2, -1]
-  ];
-
-if (count == N*N) return true; 
-
-/* Try all next moves from the current coordinate x, y */
-for (let i = 0; i < 8; i++) {
-  let r = x + movesMtrx[i][0]; 
-  let c = y + movesMtrx[i][1];
-  if (isSafe(r, c, res)) {
-    res[r][c] = count; 
-    if (solveKTUtil(r, c, count+1, res)) {
-      return true;
-    } else {
-      res[r][c] = -1;// backtracking
-    }
+  visited[sR][sC] = 0;
+  if (ktUtil(sR, sC, visited, 0)) {
+    console.log([...visited]);
+  } else {
+    console.log("i give up")
   }
 }
 
-  return false; 
-}
+findClosedTour()
 
 
-console.log(solveKT())

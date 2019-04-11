@@ -1,38 +1,20 @@
-
-
-const hasTwo = (n) => {
-  let c = n;
-  let i =0;
-  while(c) {
-    if (i>0)
-      c = c/(i*10) | 0;
-     
-    if ((c % 10) === 2) return true;
-
-    i +=1;
+const count2sUtil = (num) => {
+  let count = 0;
+  while(num>0) {
+    if (num%10 ===2) count +=1;
+    num = parseInt(num/10);
   }
 
-  return false;
+  return count;
 }
 
-const countTwos = (l, r) => {
-
-  const res = [];
-  for (let i=l; i<=r; i++) {
-    if (i>=2) {
-      if(hasTwo(i)) {
-        res.push(i)
-      }
-    }
+const count2s = (n) => {
+  let total2s = 0;
+  for (let i=0; i<n; i++) {
+    total2s += count2sUtil(i)
   }
 
-  return res
+  console.log(total2s);
 }
 
-
-
-console.log(countTwos(0, 30))
-
-
-
-//2 12 20 21 22, 23, 
+count2s(30)

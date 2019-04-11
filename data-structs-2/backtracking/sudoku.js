@@ -1,118 +1,78 @@
+const N = 9;
 
+const isSafe = (d, r, c, board) => {
+  const sqrt = Math.sqrt(N);
+  const rowStart = r - (r%sqrt)
+  const colStart = c - (c%sqrt);
 
+  for (let i=0; i<N; i++) {
+    if (board[r][i] === d || board[i][c] === d) return false;
+  }
 
-const inSubMatrix = (board, val, r, c, n, subMatrixSize) => {
-  // const rowStart = (r%subMatrixSize) * subMatrixSize;
-  // const colStart = (c%subMatrixSize) * subMatrixSize;
-
-  for (let i=0; i<3; i++) {
-    for (let j=9; j<3; j++) {
-      if (board[i+r][j+c] === val) return true;
+  for (let i=rowStart; i<(rowStart+sqrt); i++) {
+    for (let j=colStart; j<(colStart+sqrt); j++) {
+      if (board[i][j] === d) return false;
     }
+  }
+
+  return true;
+}
+
+const solveUtil = (r, c, board) => {
+  if (r===N-1 && c===N) return true;
+
+  if (c===N) {
+    c = 0;
+    r +=1;
+  }
+
+  if (r===N) {
+    return false;
+  }
+
+  if (board[r][c] === ".") {
+    for (let d=1; d<=N; d++) {
+      if (isSafe(d + "", r, c, board)) {
+        board[r][c] = d+ "";
+        if (solveUtil(r, c+1, board)) return true;
+
+        board[r][c] = ".";
+      }
+    }
+  } else {
+    return solveUtil(r, c+1, board)
   }
 
   return false;
 };
 
-
-const isSafe = (board, val, r, c, n, subMatrixSize) => {
-  if (r>=n || c>=n) return false
-  if (board[r][c] !== 0) return false;
-
-  //is in row
-  for (let col=0; col<n; col++) {
-    if (board[r][col] === val) return false;
-  }
-
-  //check in col
-  for (let row=0; row<n; row++) {
-    if (board[row][c] === val) return false;
-  }
-
-  //check if submartix already has the val
-  return !inSubMatrix(board, val, r, c, n, subMatrixSize);
-};
-
-const isBoardFull = (board, n) => {
-
-  for (let r=0; r<n; r++)
-    for (let c=0; c<n; c++)
-      if (board[r][c] === 0) return false;
-      
-  return true;
-}
-
-
-const getNextRowCol = (board, n) => {
-  for (r=0; r<n; r++) {
-    for (c=0; c<n; c++) {
-
-      if (board[r][c] === 0) {
-       return {r, c};
-      }
-    }
-  }
-
-}
-
-const sloveSudoko = (board) => {
-  
-  const n = board.length;
-  // const subMatrixSize = 3;
-
-  if (isBoardFull(board, n)) {
-
-    console.log('yaaaaaaaa =========== found it', board)
-    return true;
-
-  }
-
-  const {r, c} = getNextRowCol(board, n);
-  
-
-  for (let val=1; val<=9; val++) {
-
-    if (isSafe(board, val, r, c, n)) {
-      board[r][c] = val;
-
-      console.log('r', r, board)
-      if (sloveSudoko(board)) {
-        console.log('found')
-        return true;
-      }
-      board[r][c] = 0;
-    }
-  
-  }
-  
-
-  console.log('r', r, 'c', c)
-  return false
+const solveSudoku = (board) => {
+  solveUtil(0, 0, board)
 };
 
 
-const board = [[3,0,6,5,0,8,4,0,0], 
-[5,2,0,0,0,0,0,0,0], 
-[0,8,7,0,0,0,0,3,1], 
-[0,0,3,0,1,0,0,8,0], 
-[9,0,0,8,6,3,0,0,5], 
-[0,5,0,0,9,0,6,0,0], 
-[1,3,0,0,0,0,2,5,0], 
-[0,0,0,0,0,0,0,7,4], 
-[0,0,5,2,0,6,3,0,0]
-]
 
+  board = [["5","3",".",".","7",".",".",".","."]
+  ,["6",".",".","1","9","5",".",".","."]
+  ,[".","9","8",".",".",".",".","6","."]
+  ,["8",".",".",".","6",".",".",".","3"]
+  ,["4",".",".","8",".","3",".",".","1"]
+  ,["7",".",".",".","2",".",".",".","6"]
+  ,[".","6",".",".",".",".","2","8","."]
+  ,[".",".",".","4","1","9",".",".","5"]
+  ,[".",".",".",".","8",".",".","7","9"]];
 
-console.log(sloveSudoko(board));
-
-/**
-3 1 6 5 7 8 4 9 2
-5 2 9 1 3 4 7 6 8
-4 8 7 6 2 9 5 3 1
-2 6 3 4 1 5 9 8 7
-9 7 4 8 6 3 1 2 5
-8 5 1 7 9 2 6 4 3
-1 3 8 9 4 7 2 5 6
-6 9 2 3 5 1 8 7 4
-7 4 5 2 8 6 3 1 9
+  /**
+  [["5","3","4","6","7","8","9","1","2"],
+  ["6","7","2","1","9","5","3","4","8"],
+  ["1","9","8","3","4","2","5","6","7"],
+  ["8","5","9","7","6","1","4","2","3"],
+  ["4","2","6","8","5","3","7","9","1"],
+  ["7","1","3","9","2","4","8","5","6"],
+  ["9","6","1","5","3","7","2","8","4"],
+  ["2","8","7","4","1","9","6","3","5"],
+  ["3","4","5","2","8","6","1","7","9"]]
  */
+
+  solveSudoku(board);
+  console.log(board)

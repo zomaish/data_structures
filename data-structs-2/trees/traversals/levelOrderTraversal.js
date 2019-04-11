@@ -27,7 +27,6 @@ const getHeight = (node) => {
   return Math.max(getHeight(node.left), getHeight(node.right)) + 1;
 };
 
-
 const levelOrderTraversalQueue = (node) => {
   const q = [node];
   while(q.length) {

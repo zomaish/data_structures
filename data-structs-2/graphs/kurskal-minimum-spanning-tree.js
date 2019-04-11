@@ -49,7 +49,7 @@ class Graph {
   }
 
   kruskalMST() {
-    console.log('edges', this.sort(this.edge));
+    this.sort(this.edge);
 
     const parent = Array.apply(null, Array(this.V)).map((e, idx) => idx);
     const rank = Array.apply(null, Array(this.V)).map(Number.prototype.valueOf, 0);
@@ -70,6 +70,8 @@ class Graph {
         set[e++] = edge
       }
     }
+
+    console.log('set', set);
   }
 
 }

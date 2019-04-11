@@ -1,56 +1,55 @@
 
 
-const isSafe = (board, n, r, c) => {
-
-  for (let c=0; c<n; c++) {
-      if (board[r][c] === 1) return false;
-  }
-
-  for (let r=0; r<n; r++) {
-      if (board[r][c] === 1) return false;
-  }
-
-  let i = r, j=c;
-
-  while(i>=0 && j>=0) {
-      if (board[i--][j--] === 1) return false
-  }
-
-  i = r+1, j=c+1;
-
-  while(i<n && j<n) {
-      if (board[i++][j++] === 1) return false
-  }
-
-  return true;
+const addQueen = (r, c, queens, cols, diag, hills) => {
+  queens[r] = c;
+  cols[c] = 1;
+  diag[r-c] = 1;
+  hills[r+c] = 1
 }
 
-const nQueenUtil = (board, n, r) => {
-  if (r>=n) return true;
+const clear = (r, c, queens, cols, diag, hills) => {
+  queens[r] = -1;
+  cols[c] = -1;
+  diag[r-c] = undefined;
+  hills[r+c] = undefined
+}
 
-  for (let c=0; c<n; c++) {
-      if (isSafe(board, n, r, c)) {
-          board[r][c] = 1
-          if(nQueenUtil(board, n, r+1)) return true;
+const isSafe = (r, c, cols,queens, diag, hills, N) => {
+  return (r>=0 && r<N
+  && c >=0 && c<N
+  && cols[c] === -1
+  && diag[r-c] === undefined
+  && hills[r+c] === undefined
+  && queens[r] === -1);
+}
 
-          board[r][c] = 0;
+const backtrack = (r, queens, cols, diag, hills, res, N) => {
+  for (let c=0; c<N; c++) {
+    if (isSafe(r, c, cols, queens, diag, hills, N)) {
+
+      addQueen(r, c, queens, cols, diag, hills)
+
+      if (r+1 === N) {
+        res.push([...queens])
+      } else {
+        backtrack(r+1, queens, cols, diag, hills, res, N);
       }
-  }
 
-  return false;
+      clear(r, c, queens, cols, diag, hills);
+    }
+  }
 }
 
-const nQueen = (n) => {
-  const board = Array.apply(null, Array(n)).map(() => Array.apply(null, Array(n)).map(Number.prototype.valueOf, 0));
+const solveNQueens = (N) => {
+  const queens = Array(N).fill(-1);
+  const cols = Array(N).fill(-1);
+  const diag = {};
+  const hills = {};
+  const res = [];
 
-  if (nQueenUtil(board, n, 0)) {
-      console.log(board)
-      return board;
-  }
-  
-  
-  return false;
-}
+  backtrack(0, queens, cols, diag, hills, res, N);
 
+  console.log(res)
+};
 
-nQueen(8);
+solveNQueens(4)

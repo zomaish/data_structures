@@ -54,7 +54,6 @@ const printAllSubsetsBTUtil = (arr, res, subset, i) => {
 
   for (let j=i; j<arr.length; j++) {
     subset.push(arr[j])
-    console.log('b4 call', i, 'j', j , JSON.stringify(subset))
     printAllSubsetsBTUtil(arr, res, subset, j+1)
     subset.pop()
   }

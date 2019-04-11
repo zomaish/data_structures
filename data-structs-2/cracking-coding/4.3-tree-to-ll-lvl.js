@@ -48,10 +48,9 @@ const createLinkedListsFromTree = (node) => {
   const height = getTreeHeight(node);
 
   const res = Array.apply(null, Array(height));
-  const q = [];
   createLinkedListsFromTreeUtil(node, 0, res);
 
-  console.log(JSON.stringify(res));
+  console.log('ll ======> ', JSON.stringify(res));
   
 }
 

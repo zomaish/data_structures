@@ -18,20 +18,26 @@ check if graph has cycle of odd nodes
 */
 
 const isBipartite = (g, src) => {
+  console.log('g', g)
   const colorArr = Array.apply(null, Array(g.length)).map(Number.prototype.valueOf, -1);
   const q = [src];
   let c;
 
   colorArr[src] = 1;
   while(q.length) {
+    console.log('q', q)
     u = q.shift();
 
     //cycle
     if (g[u][u] === 1) return false;
 
+    // console.log('u', u)
     for (let v=0; v<g.length; v++) {
+      console.log('v', [u,v])
       if (g[u][v] === 1 && colorArr[v] === -1) {
-        console.log('colorArr', colorArr, colorArr[u]);
+        // console.log('colorArr', colorArr, colorArr[u]);
+
+        console.log('visiting v', v)
         colorArr[v] = 1-colorArr[u];
         q.push(v);
       } else if (g[u][v] === 1 && colorArr[u] === colorArr[v]) {
@@ -46,9 +52,9 @@ const isBipartite = (g, src) => {
 
 const G = [
   [0, 1, 0, 1], 
-    [1, 0, 1, 0], 
-    [0, 1, 0, 1], 
-    [1, 0, 1, 0]
+  [1, 0, 1, 0], 
+  [0, 1, 0, 1], 
+  [1, 0, 1, 0]
 ]; 
                             
 console.log(isBipartite(G, 0))

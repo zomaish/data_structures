@@ -17,4 +17,4 @@ const generateAllValidParens = (n) => {
   generateUtil(arr, n, n, 0)
 }
 
-generateAllValidParens(2);
+generateAllValidParens(3);

@@ -16,25 +16,26 @@ const dictionary = {
 };
 
 const breakWordUtil = (str, n, res) => {
+
+  let tres = "";
   // console.log('str', str, 'n', n, 'res', res)
-  let tres = res;
   for (let e=1; e<=n; e++) {
       const w = str.substring(0, e);
       const d = dictionary[w];
 
-      // console.log('e is ++++++++++++', e, 'str', str, 'word:', w)
 
       if (d) {
           // console.log('----------- ya boi', w)
           if (e === n) {
-              tres = tres + w;
-              console.log('found ', tres)
-              return;
+              res = res + w;
+              console.log('found ', res)
+              return res;
           };
           const newStr = str.substring(e, n);
-          breakWordUtil(newStr, newStr.length, tres + w + " ", true);
+          tres = breakWordUtil(newStr, newStr.length, res + w + " ");
       }
   }
+  return tres
 }
 
 const breakWord = (str) => {
@@ -42,7 +43,7 @@ const breakWord = (str) => {
   const n = str.length;
   const res = [];
 
-  breakWordUtil(str, n, '')
+  console.log('waaaa --------- ', breakWordUtil(str, n, ''));
           
 
 }
@@ -53,3 +54,53 @@ const str = 'ilikesamsungmobile';
 const str2 = 'ilikeicecreamandmango';
 
 breakWord(str);
+
+
+
+
+
+
+// const wordBreak = (str, dic) => {
+
+//   const visited = Array.apply(null, Array(str.length)).map(Boolean.prototype.valueOf, false);
+//   const q = [0];
+
+//   while(q.length) {
+
+//     const start = q.pop();
+
+//     for (let end = start + 1; end<=str.length; end++) {
+//       if (!visited[start]) {
+//         let word = str.substring(start, end);
+//         console.log('word ', word, start, end)
+//         if (dic[word]) {
+//           q.push(end)
+//           console.log('found', word, start, end, q);
+
+//           if (start === str.length) return true;
+//         }
+//       } else {
+//         console.log('=========== too bad, already visited', start)
+//       }
+//     }
+
+//     visited[start] = true;
+//   }
+
+// };
+
+// const str = "ilovesamsung";
+// const dic = {
+//   // "i" : "i",
+//   "love" : "love",
+//   "sam" : "sam",
+//   "sung" : "sung",
+//   "samsung" : "samsung"
+
+// }
+
+// wordBreak(str, dic)
+
+
+
+

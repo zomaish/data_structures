@@ -66,6 +66,28 @@ const isPalindrome = (node) => {
 };
 
 
+const isPalindrome = (str) => {
+  let temp = str;
+  let len = Math.floor(getLength(str)/2);
+
+  const isPalindromeUtil = (str) => {
+    if (!str) return;
+
+    const res = isPalindromeUtil(str.next);
+    if ( res === false || res === true) {
+      return res;
+    }
+
+    if (str.v !== temp.v) return false;
+    temp = temp.next;
+    len -=1;
+
+
+    if (len === 0) return true
+  }
+
+  return isPalindromeUtil(str)
+}
 
 const str = new Node('a');
 str.next = new Node('b');

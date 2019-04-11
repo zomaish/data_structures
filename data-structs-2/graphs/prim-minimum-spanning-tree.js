@@ -157,4 +157,70 @@ graph.addEdge(6, 7, 1);
 graph.addEdge(6, 8, 6); 
 graph.addEdge(7, 8, 7); 
 
-graph.primMST(graph); 
+graph.primsMST(graph);
+
+
+
+
+
+const getMinDist = (dist, visited) => {
+  let idx = -1;
+  let min = Number.MAX_SAFE_INTEGER;
+  for (let i=0; i<dist.length; i++) {
+    if (!visited[i] && dist[i] <min) {
+      min = dist[i];
+      idx = i;
+    }
+  }
+
+  return idx;
+}
+
+const primMST = (g) => {
+
+  const V = g.length;
+  const dist = Array.apply(null, Array(V)).fill(Number.MAX_SAFE_INTEGER);
+  const parent = Array.apply(null, Array(V)).fill(-1);
+  const visited = Array.apply(null, Array(V)).fill(false);
+
+  parent[0] = 0;
+  dist[0] = 0;
+
+  for (let i=0; i<V; i++) {
+
+    const u = getMinDist(dist, visited);
+
+    console.log('found u', u)
+    visited[u] = true;
+
+    for (let j=0; j<V; j++) {
+
+      if(g[u][j] > 0 && !visited[j]
+        && dist[j] > graph[u][j]
+      ) {
+        dist[j] = graph[u][j];
+        parent[j] = u;
+      }
+    }
+  }
+
+
+
+  console.log('parent', parent, dist)
+
+};
+
+const graph =  [
+  [0, 2, 0, 6, 0], 
+  [2, 0, 3, 8, 5], 
+  [0, 3, 0, 0, 7], 
+  [6, 8, 0, 0, 9], 
+  [0, 5, 7, 9, 0]
+];
+
+// Print the solution 
+primMST(graph);
+
+
+
+

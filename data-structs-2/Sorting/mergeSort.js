@@ -31,6 +31,9 @@ const mergeSort = (arr, temp, l, r) => {
 
   mergeSort(arr, temp, l, m)
   mergeSort(arr, temp, m+1, r)
+
+
+  console.log('merging ---->', arr.slice(l, m+1), ' and ', arr.slice(m+1, r+1))
   
   merge(arr, temp, l, m , r);
 

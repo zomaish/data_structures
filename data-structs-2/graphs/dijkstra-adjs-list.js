@@ -1,4 +1,4 @@
-const Graph = require("./shared/graph/GraphWeightedAdjList");
+const Graph = require("../shared/graph/GraphWeightedAdjList");
 class HeapNode {
   constructor(src, w) {
     this.src = src;

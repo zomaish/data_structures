@@ -8,7 +8,7 @@ class Node {
 const removeLoop = (node, loop) => {
 
   let slow = node;
-  let fast = loop.next;
+  let fast = loop;
 
   while(slow.next !== fast.next) {
     slow = slow.next;
@@ -47,4 +47,4 @@ d.next = e;
 e.next = c;
 
 
-console.log(detectLoop(a));
+console.log(detectLoop(a), a);

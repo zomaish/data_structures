@@ -28,9 +28,11 @@ const constructBstFromPreOrderUtil = (arr, currIdx, min, max) => {
       node.left = constructBstFromPreOrderUtil(arr, currIdx, min, val);
       node.right = constructBstFromPreOrderUtil(arr, currIdx, val, max);
     }
+
+    return node;
   }
 
-  return node;
+  
 
 
 }

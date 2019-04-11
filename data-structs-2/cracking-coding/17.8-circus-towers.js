@@ -30,13 +30,9 @@ const isInStack = (s, player) => {
 
 const findTallestStackUtil = (players, s, idx) => {
   if (idx === players.length) {
-
-    console.log('idx', idx, 'stack at the end', s)
-    console.log();console.log();
     const totalHeights = getTotalHeights(s);
     if (totalHeights > max) {
       max = totalHeights;
-      console.log('max ', max, 'players', JSON.stringify(s));
     }
 
     return;

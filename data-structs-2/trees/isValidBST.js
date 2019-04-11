@@ -1,16 +1,30 @@
-
 class Node {
-  constructor(v) {
-    this.v = v;
+  constructor (v) {
     this.left = this.right = null;
+    this.v = v;
   }
 }
 
-
-const isValidBST = (node) => {
-
-  
+const getHeight = (node) => {
+  if (!node) return 0;
+  return 1 + Math.max(getHeight(node.left), getHeight(node.right));
 }
+
+const isValidBst = (root) => {
+  if (!root) return true;
+  
+  const heightLeft = getHeight(root.left);
+  const heightRight = getHeight(root.right);
+
+  if (root.left.v > root.v) { return false}
+  if (root.right.v < root.v) { return false}
+  
+  if(Math.abs(heightLeft-heightRight) >1 || !isValidBst(root.left) || !isValidBst(root.right)) {
+    return false;
+  }
+
+  return true;
+};
 
 
 
@@ -30,5 +44,7 @@ bst.left.right.right = new Node(11)
 
 bst.right.left.left = new Node(12)
 bst.right.left.right = new Node(13)
-bst.right.right.left = new Node(14)
+bst.right.right.left = new Node(114)
 bst.right.right.right = new Node(15)
+
+console.log(isValidBst(bst))

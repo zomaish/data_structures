@@ -64,6 +64,9 @@ const kthMultiple = (k) => {
 
     val = Math.min.apply(null, [v3, v5, v7]);
 
+
+    console.log("val", val, q3, q5, q7);
+
     if (val === v3) {
       q3.pop()
       q3.unshift(3*val);
